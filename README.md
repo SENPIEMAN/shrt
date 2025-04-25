@@ -21,7 +21,7 @@ A simple, elegant URL shortener application built with Node.js and Express that 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/shrt.git
+   git clone https://github.com/SENPIEMAN/shrt.git
    cd shrt
    ```
 

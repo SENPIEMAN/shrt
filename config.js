@@ -5,7 +5,7 @@
 module.exports = {
   // Your custom domain for shortened URLs (without protocol)
   // Example: 'short.yourdomain.com'
-  domain: 'yourdomain.com',
+  domain: 'snp.mn',
   
   // Use HTTPS for shortened URLs (true/false)
   useHttps: true,
