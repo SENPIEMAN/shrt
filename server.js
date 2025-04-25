@@ -4,10 +4,11 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const { nanoid } = require('nanoid');
+const config = require('./config');
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = config.port;
 
 // Middleware
 app.use(cors());
@@ -48,8 +49,8 @@ app.post('/api/shorten', (req, res) => {
     return res.status(400).json({ error: 'Invalid URL format' });
   }
   
-  // Generate a short ID (6 characters)
-  const shortId = nanoid(6);
+  // Generate a short ID with configurable length
+  const shortId = nanoid(config.idLength);
   
   // Save to database
   const urlDatabase = readUrlDatabase();
@@ -59,8 +60,9 @@ app.post('/api/shorten', (req, res) => {
   };
   writeUrlDatabase(urlDatabase);
   
-  // Return the shortened URL
-  const shortUrl = `${req.protocol}://${req.get('host')}/${shortId}`;
+  // Return the shortened URL with custom domain
+  const protocol = config.useHttps ? 'https' : 'http';
+  const shortUrl = `${protocol}://${config.domain}/${shortId}`;
   res.json({ shortUrl, shortId });
 });
 
